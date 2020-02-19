@@ -82,39 +82,7 @@ def cnnCIFAR():
     ytest = to_categorical(y_test)
 
     model = Sequential()
-    model.add(Conv2D(32, kernel_size=(3, 3), activation='relu', input_shape=(32, 32, 3)))
-    model.add(Conv2D(64, kernel_size=(3, 3), activation='relu'))
-    model.add(MaxPooling2D(pool_size=(2, 2)))
-
-    model.add(Conv2D(128, kernel_size=(3, 3), activation='relu'))
-    model.add(MaxPooling2D(pool_size=(2, 2)))
-    model.add(Conv2D(128, kernel_size=(3, 3), activation='relu'))
-    model.add(MaxPooling2D(pool_size=(2, 2)))
-
-    model.add(Flatten())
-    model.add(Dense(1024, activation='relu'))
-    model.add(Dense(10, activation='softmax'))
-
-    model.compile(optimizer='Adam',
-                  loss='mean_squared_error',
-                  metrics=['accuracy'])
-    model.summary()
-
-    history = model.fit(x, y, epochs=10, batch_size=1024,verbose=0,validation_split = 0.05)
-    print("done")
-    results = model.evaluate(x = xtest,y = ytest,verbose = 0,batch_size = 32)
-    print(model.metrics_names,results)
-    print(history.history.keys())
-    plt.plot(history.history['accuracy'])
-    plt.plot(history.history['val_accuracy'])
-    plt.title('model accuracy')
-    plt.ylabel('accuracy')
-    plt.xlabel('epoch')
-    plt.show()
-    json_string = model.to_json()
-    print(json_string)
-    weights, biases = model.layers[0].get_weights()
-    print(weights, biases, weights.shape())
+    
 
 
-cnnCIFAR()
+cnnMNIST()
