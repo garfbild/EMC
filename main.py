@@ -53,7 +53,7 @@ def cnnMNIST():
     model.add(Dense(84,activation = 'relu'))
     model.add(Dense(10,activation = 'softmax'))
 
-    model.compile(optimizer='Adagrad',
+    model.compile(optimizer='Adam',
                   loss='mean_squared_error',
                   metrics=['accuracy'])
     model.summary()
