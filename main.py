@@ -58,7 +58,7 @@ def cnnMNIST():
                   metrics=['accuracy'])
     model.summary()
 
-    history = model.fit(x, y, epochs=20, batch_size=1024,verbose=0,validation_split = 0.05)
+    history = model.fit(x, y, epochs=10, batch_size=1024,verbose=0,validation_split = 0.05)
     print("done")
     results = model.evaluate(x = xtest,y = ytest,verbose = 0,batch_size = 32)
     print(model.metrics_names,results)
@@ -69,10 +69,10 @@ def cnnMNIST():
     plt.ylabel('accuracy')
     plt.xlabel('epoch')
     plt.show()
-    json_string = model.to_json()
-    print(json_string)
-    weights, biases = model.layers[0].get_weights()
-    #print(weights, biases, weights.shape())
+    #json_string = model.to_json()
+    #print(json_string)
+    weights = model.layers[0].get_weights()
+    print(weights)
 
 def cnnCIFAR():
     (x_train, y_train), (x_test, y_test) = cifar10.load_data()
