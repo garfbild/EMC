@@ -58,7 +58,7 @@ def cnnMNIST():
                   metrics=['accuracy'])
     model.summary()
 
-    history = model.fit(x, y, epochs=230, batch_size=1024,verbose=0,validation_split = 0.05)
+    history = model.fit(x, y, epochs=20, batch_size=1024,verbose=0,validation_split = 0.05)
     print("done")
     results = model.evaluate(x = xtest,y = ytest,verbose = 0,batch_size = 32)
     print(model.metrics_names,results)
