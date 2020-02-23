@@ -53,12 +53,12 @@ def cnnMNIST():
     model.add(Dense(84,activation = 'relu'))
     model.add(Dense(10,activation = 'softmax'))
 
-    model.compile(optimizer='Adam',
+    model.compile(optimizer='Adagrad',
                   loss='mean_squared_error',
                   metrics=['accuracy'])
     model.summary()
 
-    history = model.fit(x, y, epochs=10, batch_size=1024,verbose=0,validation_split = 0.05)
+    history = model.fit(x, y, epochs=20, batch_size=4000,verbose=0,validation_split = 0.05)
     print("done")
     results = model.evaluate(x = xtest,y = ytest,verbose = 0,batch_size = 32)
     print(model.metrics_names,results)
@@ -72,7 +72,7 @@ def cnnMNIST():
     json_string = model.to_json()
     print(json_string)
     weights, biases = model.layers[0].get_weights()
-    print(weights, biases, weights.shape())
+    #print(weights, biases, weights.shape())
 
 def cnnCIFAR():
     (x_train, y_train), (x_test, y_test) = cifar10.load_data()
@@ -82,7 +82,7 @@ def cnnCIFAR():
     ytest = to_categorical(y_test)
 
     model = Sequential()
-    
+
 
 
 cnnMNIST()
