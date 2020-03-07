@@ -21,19 +21,25 @@ def fnn():
     ytest = to_categorical(y_test)
 
     model = Sequential()
-    model.add(Dense(64,input_dim=784,activation = 'relu'))
-    model.add(Dense(64,activation = 'relu'))
-    model.add(Dense(64,activation = 'relu'))
+    model.add(Dense(16,input_dim=784,activation = 'relu'))
+    model.add(Dense(16,activation = 'relu'))
     model.add(Dense(10,activation = 'softmax'))
-    model.compile(optimizer='sgd',
+    model.compile(optimizer='adam',
                   loss='mean_squared_error',
                   metrics=['accuracy'])
     model.summary()
     start_time = time.time()
-    model.fit(x, y, epochs=10, batch_size=32,verbose=0)
-    results = model.evaluate(x = xtest,y = ytest,verbose = 0,batch_size = 32)
+    history = model.fit(x, y, epochs=50, batch_size=800,verbose=2,validation_split = 0.05)
+    results = model.evaluate(x = xtest,y = ytest,verbose = 2,batch_size = 200)
     print(time.time() - start_time)
     print(model.metrics_names,results)
+    print(history.history.keys())
+    plt.plot(history.history['accuracy'])
+    plt.plot(history.history['val_accuracy'])
+    plt.title('model accuracy')
+    plt.ylabel('accuracy')
+    plt.xlabel('epoch')
+    plt.show()
 
 
 def cnnMNIST():
@@ -123,4 +129,4 @@ def cnnCIFAR():
     plt.show()
     model.save("cnn.h5")
 
-cnnMNIST()
+cnnCIFAR()
